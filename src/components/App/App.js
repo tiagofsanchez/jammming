@@ -8,17 +8,32 @@ import SearchResults from '../SearchResults/searchresults';
 import Playlist from '../Playlist/playlist';
 
 
+
 class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      searchResults: []
+      searchResults: [
+        {
+          name: "I would love to sing",
+          artist: "Tiago", 
+          album: "The WORST ABLBUM EVER", 
+        },
+        {
+          name: "I would love to sing",
+          artist: "Tiago", 
+          album: "The WORST ABLBUM EVER",
+        },
+        {
+          name: "I would love to sing",
+          artist: "Tiago", 
+          album: "The WORST ABLBUM EVER",
+        },
+      ]
       }
-  
 
   }
-  
-  
+    
   render() {
     return (
       <div>
