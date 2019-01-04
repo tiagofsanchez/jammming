@@ -15,23 +15,18 @@ class App extends Component {
     this.state = {
       searchResults: [
         {
-          name: "I would love to sing",
-          artist: "Tiago", 
-          album: "The WORST ABLBUM EVER", 
-          id: 1,
+          name: "Tiny Dancer",
+          artist: "Elton John", 
+          album: "Madman Across The Water", 
+          id: 11,
         },
         {
-          name: "I would love to sing",
+          name: "Tiny Dancer",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER",
-          id: 2,
+          id: 22,
         },
-        {
-          name: "I would love to sing",
-          artist: "Tiago", 
-          album: "The WORST ABLBUM EVER",
-          id: 2,
-        },
+        
       ],
 
       playListName: "Top List",
@@ -42,13 +37,13 @@ class App extends Component {
           name: "I would love to sing",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER", 
-          id: 3,
+          id: 1,
         },
         {
           name: "I would love to sing",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER",
-          id: 4,
+          id: 2,
         }, 
       ]
       }
@@ -59,28 +54,29 @@ class App extends Component {
       this.updatePlaylistName= this.updatePlaylistName.bind(this);
   }
 
-  /* I am not sure what this here is doing and I think this is wrong, need to check with Diogo*/
   addTrack (track) {
-    if (!this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
-      this.setState(prevState => ({
-        playlistTracks: [...prevState.playlistTracks, track]
-      }));
+    let tempPlaylist = this.state.playListTracks;
+    if(this.state.playListTracks.find(savedTrack => savedTrack.id === track.id)) {
+      return;
+    } else { 
+      tempPlaylist.push(track);
+      this.setState ({playListTracks: tempPlaylist})
     }
-    }
+  }
 
-  /* I dont't get how to code this method */    
   removeTrack (track) {
+    const tempPlaylist= this.state.playListTracks;
+    const newPlaylist = tempPlaylist.filter(removeTrack => removeTrack.id !== track.id);
+    this.setState ({playListTracks: newPlaylist});
     }
 
-  updatePlaylistName(name) {
+    updatePlaylistName(name) {
     this.setState({playListName: name})
   }  
 
 
   render() {
     const {searchResults, playListName, playListTracks} = this.state
-    
-    
     return (
       <div>
           <h1>Ja<span className="highlight">mmm</span>ing</h1>
