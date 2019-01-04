@@ -8,8 +8,8 @@ class Playlist extends React.Component {
         return (
         <div className="Playlist">
             <input value="New Playlist"/>
-            {/* <TrackList /> */}
-            {/* Add a TrackList component */}
+            <TrackList tracks={this.props.playListTracks}/> 
+            {/* Add a TrackList component -> Why I don't have to map() as we did for the tracklist  */}
             <a className="Playlist-save">SAVE TO SPOTIFY</a>
         </div>
         )
