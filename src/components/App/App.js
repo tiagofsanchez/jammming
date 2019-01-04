@@ -34,9 +34,8 @@ class App extends Component {
         },
       ],
 
-      playListName: {
-        name: "Top List"
-      },
+      playListName: "Top List",
+      
 
       playListTracks: [
         {
@@ -57,17 +56,24 @@ class App extends Component {
 
       this.addTrack = this.addTrack.bind(this);
       this.removeTrack = this.removeTrack.bind(this);
+      this.updatePlaylistName= this.updatePlaylistName.bind(this);
   }
 
   /* I am not sure what this here is doing and I think this is wrong, need to check with Diogo*/
   addTrack (track) {
-    if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
-      return;
+    if (!this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
+      this.setState(prevState => ({
+        playlistTracks: [...prevState.playlistTracks, track]
+      }));
     }
     }
 
+  /* I dont't get how to code this method */    
   removeTrack (track) {
+    }
 
+  updatePlaylistName(name) {
+    this.setState({playListName: name})
   }  
 
 
@@ -79,7 +85,7 @@ class App extends Component {
             <SearchBar  />
             <div className="App-playlist">
               <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-              <Playlist playListName={this.state.playListName} playListTracks={this.state.playListTracks}/>
+              <Playlist onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={this.state.playListName} playListTracks={this.state.playListTracks}/>
             </div>
           </div>
       </div>
