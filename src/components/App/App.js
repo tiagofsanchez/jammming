@@ -78,14 +78,17 @@ class App extends Component {
 
 
   render() {
+    const {searchResults, playListName, playListTracks} = this.state
+    
+    
     return (
       <div>
           <h1>Ja<span className="highlight">mmm</span>ing</h1>
           <div class="App">
             <SearchBar  />
             <div className="App-playlist">
-              <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-              <Playlist onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={this.state.playListName} playListTracks={this.state.playListTracks}/>
+              <SearchResults searchResults={searchResults} onAdd={this.addTrack}/>
+              <Playlist onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks}/>
             </div>
           </div>
       </div>

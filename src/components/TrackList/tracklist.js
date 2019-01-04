@@ -4,11 +4,11 @@ import Track from '../Track/track';
 
 class TrackList extends React.Component {
     render () {
-        /* const {tracks} = this.props se eu quiser tirar o this.props no codigo */
+        const {tracks, onAdd, onRemove, isRemoval} = this.props 
         return (
             <div className="TrackList">
-                {this.props.tracks.map(track => {
-                    return <Track key={track.id} track={track} onAdd={this.props.onAdd} onRemove={this.props.onRemove} isRemoval={this.props.isRemoval}/>
+                {tracks.map(track => {
+                    return <Track key={track.id} track={track} onAdd={onAdd} onRemove={onRemove} isRemoval={isRemoval}/>
                     })}
                 {/* <Track /> */} 
                 {/* You will add a map method that renders a set of Track components */} 

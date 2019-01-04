@@ -14,10 +14,12 @@ class Playlist extends React.Component {
     }
     
     render ()  {
+        const {playListName, playListTracks, onRemove} = this.props
+
         return (
         <div className="Playlist">
-            <input value={this.props.playListName} onChange={this.handleNameChange}/>
-            <TrackList tracks={this.props.playListTracks} onRemove={this.props.onRemove} isRemoval={true} /> 
+            <input value={playListName} onChange={this.handleNameChange}/>
+            <TrackList tracks={playListTracks} onRemove={onRemove} isRemoval={true} /> 
             {/* Add a TrackList component -> Why I don't have to map() as we did for the tracklist  */}
             <a className="Playlist-save">SAVE TO SPOTIFY</a>
         </div>
