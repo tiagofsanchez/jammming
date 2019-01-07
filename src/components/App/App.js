@@ -13,37 +13,42 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      searchTerm: '',
+      
       searchResults: [
         {
           name: "Tiny Dancer",
           artist: "Elton John", 
           album: "Madman Across The Water", 
           id: 11,
+          uri: 1231,
         },
         {
           name: "Tiny Dancer",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER",
           id: 22,
+          uri: 234324,
         },
         
       ],
 
       playListName: "Top List",
       
-
       playListTracks: [
         {
           name: "I would love to sing",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER", 
           id: 1,
+          uri: 543,
         },
         {
           name: "I would love to sing",
           artist: "Tiago", 
           album: "The WORST ABLBUM EVER",
           id: 2,
+          uri: 892,
         }, 
       ]
       }
@@ -52,7 +57,9 @@ class App extends Component {
       this.addTrack = this.addTrack.bind(this);
       this.removeTrack = this.removeTrack.bind(this);
       this.updatePlaylistName= this.updatePlaylistName.bind(this);
-  }
+      this.savePlaylist = this.savePlaylist.bind(this); 
+      this.search = this.search.bind(this);
+     }
 
   addTrack (track) {
     let tempPlaylist = this.state.playListTracks;
@@ -73,18 +80,28 @@ class App extends Component {
     updatePlaylistName(name) {
     this.setState({playListName: name})
   }  
+  
+  savePlaylist () {  
+    const trackURIs = this.state.playListTracks.map(track => {return track.uri});
+    console.log(trackURIs);
+    return trackURIs;
+  }
 
-
+  search(search) {
+    this.setState({searchTerm: search})
+    console.log(this.state.searchTerm);  
+  }
+  
   render() {
     const {searchResults, playListName, playListTracks} = this.state
     return (
       <div>
           <h1>Ja<span className="highlight">mmm</span>ing</h1>
           <div class="App">
-            <SearchBar  />
+            <SearchBar onSearch={this.search} />
             <div className="App-playlist">
               <SearchResults searchResults={searchResults} onAdd={this.addTrack}/>
-              <Playlist onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks}/>
+              <Playlist onSave={this.savePlaylist} onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks}/>
             </div>
           </div>
       </div>
