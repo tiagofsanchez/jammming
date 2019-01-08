@@ -6,16 +6,18 @@ import '../Playlist/playlist';
 import SearchBar from '../SearchBar/searchbar';
 import SearchResults from '../SearchResults/searchresults';
 import Playlist from '../Playlist/playlist';
+import Spotify from '../../util/spotify'
 
 
 
 
 class App extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
+      accessToken: null,
       searchTerm: '',
-      
       searchResults: [
         {
           name: "Tiny Dancer",
@@ -61,6 +63,17 @@ class App extends Component {
       this.search = this.search.bind(this);
      }
 
+  componentDidMount() {
+
+    let { accessToken } = this.state
+
+    if (!accessToken) {
+      const spotify = new Spotify(accessToken)
+      accessToken = spotify.getAccessToken()
+      this.setState({ accessToken })
+    }
+
+  }
 
   addTrack (track) {
     let tempPlaylist = this.state.playListTracks;
@@ -103,7 +116,6 @@ class App extends Component {
           <div class="App">
             <SearchBar onSearch={this.search} />
             <div className="App-playlist">
-
               <SearchResults searchResults={searchResults} onAdd={this.addTrack}/>
               <Playlist onSave={this.savePlaylist} onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks}/>
             </div>
