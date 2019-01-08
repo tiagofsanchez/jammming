@@ -1,9 +1,11 @@
 .Track {
     display: flex;
-    align-items: center;
+    align-items: center
+    ;
     border-bottom: 1px solid rgba(256, 256, 256, 0.8);
   }
   
+
   .Track-action {
     cursor: pointer;
     padding: .5rem;
