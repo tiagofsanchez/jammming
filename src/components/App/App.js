@@ -35,14 +35,17 @@ class App extends Component {
   }
     
   render() {
+    
+    const { searchResults } = this.state
+    
     return (
       <div>
           <h1>Ja<span className="highlight">mmm</span>ing</h1>
           <div class="App">
             <SearchBar  />
             <div className="App-playlist">
-              <SearchResults searchresults={this.state.searchResults}/>
-              <Playlist/>
+              <SearchResults searchResults={searchResults}/>
+              <Playlist searchResults={searchResults}/>
             </div>
           </div>
       </div>
