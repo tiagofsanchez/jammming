@@ -6,6 +6,7 @@ import '../Playlist/playlist';
 import SearchBar from '../SearchBar/searchbar';
 import SearchResults from '../SearchResults/searchresults';
 import Playlist from '../Playlist/playlist';
+import Spotify from '../../util/spotify'
 
 
 
@@ -14,44 +15,9 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      searchTerm: '',
-      
-      searchResults: [
-        {
-          name: "Tiny Dancer",
-          artist: "Elton John", 
-          album: "Madman Across The Water", 
-          id: 11,
-          uri: 1231,
-        },
-        {
-          name: "Tiny Dancer",
-          artist: "Tiago", 
-          album: "The WORST ABLBUM EVER",
-          id: 22,
-          uri: 234324,
-        },
-        
-      ],
-
+      searchResults: [],
       playListName: "Top List",
-      
-      playListTracks: [
-        {
-          name: "I would love to sing",
-          artist: "Tiago", 
-          album: "The WORST ABLBUM EVER", 
-          id: 1,
-          uri: 543,
-        },
-        {
-          name: "I would love to sing",
-          artist: "Tiago", 
-          album: "The WORST ABLBUM EVER",
-          id: 2,
-          uri: 892,
-        }, 
-      ]
+      playListTracks: [],
       }
 
       this.addTrack = this.addTrack.bind(this);
@@ -87,12 +53,19 @@ class App extends Component {
     console.log(trackURIs);
     return trackURIs;
   }
-
+/* 
   search(search) {
     this.setState({searchTerm: search})
     console.log(this.state.searchTerm);  
-  }
+  } */
   
+  /* 1. How do I know that the term is being passed? Before (up), it was being passed */
+  search(term) {
+    Spotify.search(term)
+      .then(searchResults => {this.setState({
+        searchResults: searchResults
+      })});
+  }
 
   render() {
     const {searchResults, playListName, playListTracks} = this.state
