@@ -27,7 +27,6 @@ class App extends Component {
       this.search = this.search.bind(this);
      }
 
-
   addTrack (track) {
     let tempPlaylist = this.state.playListTracks;
     if(this.state.playListTracks.find(savedTrack => savedTrack.id === track.id)) {
@@ -48,10 +47,17 @@ class App extends Component {
     this.setState({playListName: name})
   }  
   
-  savePlaylist () {  
+  savePlaylist () {
     const trackURIs = this.state.playListTracks.map(track => {return track.uri});
-    console.log(trackURIs);
-    return trackURIs;
+    Spotify.savePlaylist(this.state.playlistName, trackURIs)
+    this.setState((prevState) => {
+        return {
+          playlistName: 'New Playlist',
+          playlistTracks: []
+      }
+     },
+        () => {this.updatePlaylistName('New Playlist')}
+      );
   }
 
     search(term){

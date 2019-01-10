@@ -27,11 +27,10 @@ const Spotify = {
   }, 
   
 
-
       search(searchterm) {
         const options = {headers: {Authorization: `Bearer ${accessToken}`},}
         const searchUrl = `https://api.spotify.com/v1/search?type=track&q=${searchterm.replace(' ', '%20')}`;
-      fetch (searchUrl, options)
+      return fetch (searchUrl, options)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -43,12 +42,61 @@ const Spotify = {
             album: track.album.name,
             uri: track.uri
           };
-      });;
+      });
       })
       .catch (err => console.log(err));
     },  
       
+    savePlaylist (playListName, trackURIs) {
+      /* geting the user id and this is workign as I am getting my userId logged*/
+      const headers = {Authorization: `Bearer ${accessToken}`};
+      const userUrl= 'https://api.spotify.com/v1/me' 
+      let userId = undefined;
+      let playlistId = undefined;
+    
+      fetch (userUrl , {headers: headers})
+     .then (res => res.json())
+     .then (data => {
+       userId = data.id;
+       console.log(userId);
+      })
+     
+     /* posting the playlistName and getting a playlistId */
+     .then(() => { 
+     const newPlaylistUrl = `https://api.spotify.com/v1/users/${userId}/playlists`;
+     fetch (newPlaylistUrl, {
+       method: 'POST',
+       headers: headers, 
+       body: JSON.stringify({
+        playListName: playListName
+        }) 
+     })
+    })
+     .then (res => res.json())
+     .then (data => {
+       playlistId = data.id;
+       console.log(data);
+       
+      })
+     
+     
+     /* posting the tracks with a uri that is in the playList into Spotify */
+     .then(() => {
+      const addPlayListTracksUrl = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
+      fetch(addPlayListTracksUrl , {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({
+          uris: trackURIs
+      })
+    });
+
+     })
+     },
+      
     }
+  
+    
   
 
     
