@@ -9,7 +9,7 @@ import Playlist from '../Playlist/playlist';
 import Spotify from '../../util/spotify'
 
 
-
+Spotify.getAccessToken();
 
 class App extends Component {
   constructor (props) {
@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       searchResults: [],
       playListName: "Top List",
-      playListTracks: [],
+      playListTracks: []
       }
 
       this.addTrack = this.addTrack.bind(this);
@@ -53,19 +53,13 @@ class App extends Component {
     console.log(trackURIs);
     return trackURIs;
   }
-/* 
-  search(search) {
-    this.setState({searchTerm: search})
-    console.log(this.state.searchTerm);  
-  } */
-  
-  /* 1. How do I know that the term is being passed? Before (up), it was being passed */
-  search(term){
-    Spotify.search(term)
-    .then(searchResults => this.setState({
-      searchResults: searchResults
-    }));
-  }
+
+    search(term){
+      Spotify.search(term)
+      .then(searchResults => this.setState({
+        searchResults: searchResults
+      }));
+    }
 
   render() {
     const {searchResults, playListName, playListTracks} = this.state
