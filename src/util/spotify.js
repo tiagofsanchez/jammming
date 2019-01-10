@@ -48,6 +48,7 @@ const Spotify = {
     },  
       
     savePlaylist (playListName, trackURIs) {
+    
       /* geting the user id and this is workign as I am getting my userId logged*/
       const headers = {Authorization: `Bearer ${accessToken}`};
       const userUrl= 'https://api.spotify.com/v1/me' 
@@ -63,15 +64,15 @@ const Spotify = {
      
      /* posting the playlistName and getting a playlistId */
      .then(() => { 
-     const newPlaylistUrl = `https://api.spotify.com/v1/users/${userId}/playlists`;
-     fetch (newPlaylistUrl, {
-       method: 'POST',
-       headers: headers, 
-       body: JSON.stringify({
-        playListName: playListName
-        }) 
-     })
-    })
+        const newPlaylistUrl = `https://api.spotify.com/v1/users/${userId}/playlists`;
+        fetch (newPlaylistUrl, {
+          method: 'POST',
+          headers: headers, 
+          body: JSON.stringify({
+            playListName: playListName
+          }) 
+        })
+      })
      .then (res => res.json())
      .then (data => {
        playlistId = data.id;

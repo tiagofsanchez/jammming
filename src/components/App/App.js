@@ -56,7 +56,7 @@ class App extends Component {
           playlistTracks: []
       }
      },
-        () => {this.updatePlaylistName('New Playlist')}
+       /*  () => {this.updatePlaylistName('New Playlist')} */
       );
   }
 
