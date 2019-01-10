@@ -60,11 +60,11 @@ class App extends Component {
   } */
   
   /* 1. How do I know that the term is being passed? Before (up), it was being passed */
-  search(term) {
+  search(term){
     Spotify.search(term)
-      .then(searchResults => {this.setState({
-        searchResults: searchResults
-      })});
+    .then(searchResults => this.setState({
+      searchResults: searchResults
+    }));
   }
 
   render() {

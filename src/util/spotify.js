@@ -28,13 +28,12 @@ const Spotify = {
       },
 
       search(searchterm) {
-        const options = {
-          headers: {Authorization: `Bearer ${accessToken}`},
-      }
-      fetch (`https://api.spotify.com/v1/search?type=track&q=${searchterm}`, options)
+        const options = {headers: {Authorization: `Bearer ${accessToken}`},}
+        const searchUrl = `https://api.spotify.com/v1/search?type=track&q=${searchterm.replace(' ', '%20')}`;
+      fetch (searchUrl, options)
       .then(res => res.json())
       .then(data => {
-        return data.map(track => {
+        return data.tracks.items.map(track => {
           return {
             id: track.id,
             name: track.name,
