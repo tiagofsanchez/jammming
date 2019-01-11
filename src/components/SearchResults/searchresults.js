@@ -4,6 +4,7 @@ import TrackList from '../TrackList/tracklist';
 
 
 class SearchResults extends React.Component {
+
     render () {
         const {searchResults, onAdd} = this.props
 

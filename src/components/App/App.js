@@ -7,11 +7,13 @@ import SearchBar from '../SearchBar/searchbar';
 import SearchResults from '../SearchResults/searchresults';
 import Playlist from '../Playlist/playlist';
 import Spotify from '../../util/spotify'
+import 'semantic-ui-css/semantic.min.css'
 
 
 Spotify.getAccessToken();
 
 class App extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -26,6 +28,7 @@ class App extends Component {
       this.savePlaylist = this.savePlaylist.bind(this); 
       this.search = this.search.bind(this);
      }
+
 
   addTrack (track) {
     let tempPlaylist = this.state.playListTracks;
@@ -48,8 +51,9 @@ class App extends Component {
   }  
   
   savePlaylist () {
+
     const trackURIs = this.state.playListTracks.map(track => {return track.uri});
-    Spotify.savePlaylist(this.state.playlistName, trackURIs)
+    Spotify.savePlaylist(this.state.playListName, trackURIs)
     this.setState((prevState) => {
         return {
           playlistName: 'New Playlist',
@@ -68,6 +72,7 @@ class App extends Component {
     }
 
   render() {
+
     const {searchResults, playListName, playListTracks} = this.state
     return (
       <div>

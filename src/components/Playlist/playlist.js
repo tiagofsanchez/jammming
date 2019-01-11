@@ -16,6 +16,7 @@ class Playlist extends React.Component {
     
  
     render ()  {
+
         const {playListName, playListTracks, onRemove, onSave} = this.props
 
         return (
