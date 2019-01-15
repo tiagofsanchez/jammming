@@ -7,7 +7,9 @@ import SearchBar from '../SearchBar/searchbar';
 import SearchResults from '../SearchResults/searchresults';
 import Playlist from '../Playlist/playlist';
 import Spotify from '../../util/spotify'
-/* import 'semantic-ui-css/semantic.min.css' */
+import PopUp from '../PopUp/popUp';
+
+
 
 
 Spotify.getAccessToken();
@@ -19,7 +21,8 @@ class App extends Component {
     this.state = {
       searchResults: [],
       playListName: "Top List",
-      playListTracks: []
+      playListTracks: [], 
+      popUpShow: false,
     }
 
     this.addTrack = this.addTrack.bind(this);
@@ -27,6 +30,7 @@ class App extends Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+   
   }
 
 
@@ -57,11 +61,13 @@ class App extends Component {
     const trackURIs = this.state.playListTracks.map(track => {
       return track.uri;
     });
+    debugger
     Spotify.savePlaylist(this.state.playListName, trackURIs)
     this.setState((prevState) => {
       return {
         playListName: 'New Playlist',
-        playListTracks: []
+        playListTracks: [],
+        popUpShow: false
       }
     },
     );
@@ -74,18 +80,31 @@ class App extends Component {
       }));
   }
 
+  togglePopup = () => {
+    this.setState(prevState => {
+      return {popUpShow: !prevState.popUpShow}
+    });
+  }
+ 
   render() {
     
-    const { searchResults, playListName, playListTracks } = this.state
+    const { searchResults, playListName, playListTracks, popUpShow } = this.state
     
     return (
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
-        <div class="App">
+        {popUpShow && (
+          <div className="popup">
+            <div className="popup_inner">
+              <PopUp onSave={this.savePlaylist} onChoose={this.togglePopup} />
+            </div>
+          </div>
+        )}
+        <div className="App">
           <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={searchResults} onAdd={this.addTrack} />
-            <Playlist onSave={this.savePlaylist} onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks} />
+            <Playlist onChoose={this.togglePopup.bind(this)} onNameChange={this.updatePlaylistName} onRemove={this.removeTrack} playListName={playListName} playListTracks={playListTracks} />
           </div>
         </div>
       </div>

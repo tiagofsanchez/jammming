@@ -99,16 +99,6 @@ const Spotify = {
         });
       })
   },
-
 }
-
-
-
-
-
-/* Questions: 
-1. To check the url I think this will be here https://developer.spotify.com/documentation/web-api/reference-beta/#endpoint-search
-2. Do I need to take care of any error, or that is just for POST method?*/
-
 
 export default Spotify;
