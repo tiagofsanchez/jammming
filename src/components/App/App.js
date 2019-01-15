@@ -61,7 +61,6 @@ class App extends Component {
     const trackURIs = this.state.playListTracks.map(track => {
       return track.uri;
     });
-    debugger
     Spotify.savePlaylist(this.state.playListName, trackURIs)
     this.setState((prevState) => {
       return {
