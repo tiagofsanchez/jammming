@@ -1,5 +1,6 @@
 import React from 'react';
 import './searchbar.css';
+import { Button } from 'semantic-ui-react';
 
 
 
@@ -11,7 +12,8 @@ class SearchBar extends React.Component {
         this.handleTermChange = this.handleTermChange.bind(this);
     }
 
-    handleSearch() {
+    handleSearch(e) {
+        e.preventDefault();
         console.log('handleSearch');
         this.props.onSearch(this.state.term);
     }
@@ -23,10 +25,10 @@ class SearchBar extends React.Component {
     render() {
 
         return (
-            <div className="SearchBar">
+            <form className="SearchBar" onClick={this.handleSearch}>
                 <input placeholder="Enter A Song, Album, or Artist" onChange={this.handleTermChange} />
-                <a onClick={this.handleSearch}>SEARCH</a>
-            </div>
+                <button onClick={this.handleSearch}>SEARCH</button>
+            </form>
         )
     }
 }

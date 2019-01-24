@@ -10,8 +10,6 @@ import Spotify from '../../util/spotify'
 import PopUp from '../PopUp/popUp';
 
 
-
-
 Spotify.getAccessToken();
 
 class App extends Component {
