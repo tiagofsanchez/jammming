@@ -30,7 +30,6 @@ const Spotify = {
     return fetch(searchUrl, options)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         return data.tracks.items.map(track => {
           return {
             id: track.id,

@@ -1,6 +1,7 @@
 import React from 'react';
 import './track.css'
-import { Label } from 'semantic-ui-react';
+
+
 
 class Track extends React.Component {
     constructor(props) {
@@ -16,6 +17,13 @@ class Track extends React.Component {
             return (<a className="Track-action" onClick={this.addTrack} >+</a>);
     }
 
+    playMusic() {
+        var a = new Audio();
+        a.src= this.props.track.preview;
+        a.pause();
+        a.play();
+    }
+    
     addTrack() {
         this.props.onAdd(this.props.track);
     }
@@ -25,14 +33,20 @@ class Track extends React.Component {
     }
 
     render() {
-        const { track } = this.props
+        const { track , isRemoval } = this.props
         return (
             <div className="Track">
                 <div className="Track-information">
                     <h3>{track.name}</h3>
-                    <p>{track.artist} | {track.album} </p> 
+                    <p>{track.artist} | {track.album} </p>
                 </div>
-                {track.preview ? <audio controls src={track.preview}></audio> : null}
+                <div className="Track-preview">
+                    {track.preview && !isRemoval ? 
+
+                    <button className="Track-action" onClick={this.playMusic()}>preview</button>
+                    : 
+                    null}
+                </div>
                 <a className="Track-action">{this.renderAction()}</a>
             </div>
         )
