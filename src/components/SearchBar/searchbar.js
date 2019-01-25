@@ -1,6 +1,5 @@
 import React from 'react';
 import './searchbar.css';
-import { Button } from 'semantic-ui-react';
 
 
 
