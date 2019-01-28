@@ -6,6 +6,9 @@ import './track.css'
 class Track extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isPlaying: false
+        }
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
         this.playMusic=this.playMusic.bind(this);
@@ -19,9 +22,13 @@ class Track extends React.Component {
     }
 
     playMusic() {
-        var a = new Audio(this.props.track.preview);
-        a.play();
-    
+        const a = new Audio(this.props.track.preview);
+        const { isPlaying } = this.state;
+        debugger
+        return (isPlaying ? a.pause() : a.play());
+        this.setState(prevState => {
+            return ({ isPlaying: !prevState.isPlaying })
+        });
     }
     
     addTrack() {
@@ -33,6 +40,7 @@ class Track extends React.Component {
     }
 
     render() {
+        const { isPlaying } = this.state;
         const { track , isRemoval } = this.props
         return (
             <div className="Track">
@@ -42,8 +50,7 @@ class Track extends React.Component {
                 </div>
                 <div className="Track-preview">
                     {track.preview && !isRemoval ? 
-
-                    <button className="Track-action" onClick={this.playMusic}>preview</button>
+                    <a className="Preview" onClick={this.playMusic} isPlaying={isPlaying} >preview</a>
                     : 
                     null}
                 </div>
