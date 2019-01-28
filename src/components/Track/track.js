@@ -8,6 +8,7 @@ class Track extends React.Component {
         super(props);
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
+        this.playMusic=this.playMusic.bind(this);
     }
 
     renderAction() {
@@ -18,10 +19,9 @@ class Track extends React.Component {
     }
 
     playMusic() {
-        var a = new Audio();
-        a.src= this.props.track.preview;
-        a.pause();
+        var a = new Audio(this.props.track.preview);
         a.play();
+    
     }
     
     addTrack() {
@@ -43,7 +43,7 @@ class Track extends React.Component {
                 <div className="Track-preview">
                     {track.preview && !isRemoval ? 
 
-                    <button className="Track-action" onClick={this.playMusic()}>preview</button>
+                    <button className="Track-action" onClick={this.playMusic}>preview</button>
                     : 
                     null}
                 </div>
